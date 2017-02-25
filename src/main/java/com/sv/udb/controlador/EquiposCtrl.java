@@ -9,6 +9,10 @@ import com.sv.udb.modelo.Equipos;
 import com.sv.udb.recursos.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,19 +22,68 @@ public class EquiposCtrl {
     
     public boolean guar(Equipos obje)
     {
-        //Equipos obje = new Equipos();
         boolean resp = false;
         Connection cn = new Conexion().getConn();
         try {
-            PreparedStatement cmd = cn.prepareStatement("Insert into equipos values(NULL, ?, ?)");
-         //   cmd.setString(1, obje.setNombEqui());
-            
-            
-            
-            
-        } catch (Exception e) {
+            PreparedStatement cmd = cn.prepareStatement("Insert into equipos values(NULL,?,?)");
+        cmd.setString(1, obje.getNombEqui());
+        cmd.setString(2, obje.getDescEqui());
+        cmd.execute();
+        resp = true;          
+        } 
+        catch (Exception e) 
+        {
+            System.err.println("Error al guardar equipos: " + e.getMessage());
+        }
+        finally
+        {
+            try {
+                if(cn!=null)
+                {
+                    if(!cn.isClosed())
+                    {
+                        cn.close();
+                    }
+                }
+                
+            } catch (SQLException err) 
+            {
+                err.printStackTrace();
+            }
         }
         return resp;
     }
-    
+    //Consulta para sacar todos los tados de la tabla :v
+    public List<Equipos> consTodo()
+    {
+        List<Equipos> resp = new ArrayList();
+        Connection cn = new Conexion().getConn();
+        try {
+            PreparedStatement cmd = cn.prepareStatement("Select * from equipos");
+            ResultSet rs = cmd.executeQuery();
+            while(rs.next())
+            {
+                resp.add(new Equipos(rs.getInt(1),rs.getString(2),rs.getString(3)));
+            }
+        } catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        finally 
+        {
+            try {
+                if(cn!=null)
+                {
+                    if(!cn.isClosed())
+                    {
+                        cn.close();
+                    }
+                }
+            } catch (SQLException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        return resp;
+    }
 }

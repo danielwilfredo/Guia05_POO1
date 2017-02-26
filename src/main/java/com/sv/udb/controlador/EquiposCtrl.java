@@ -101,9 +101,9 @@ public class EquiposCtrl {
         boolean resp = false;
         Connection cn = new Conexion().getConn();
         try {
-            String consu = "DELETE * FROM equipos WHERE codi_equi = "+obje.getCodiEqui()+"";
+            String consu = "DELETE FROM equipos WHERE codi_equi = " + obje.getCodiEqui() +"";
             PreparedStatement cmd = cn.prepareStatement(consu);
-           cmd.execute();
+            cmd.execute();
         resp = true;          
         } 
         catch (Exception e) 

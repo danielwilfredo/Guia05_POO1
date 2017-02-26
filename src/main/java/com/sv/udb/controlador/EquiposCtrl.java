@@ -53,6 +53,84 @@ public class EquiposCtrl {
         }
         return resp;
     }
+    
+    //UPDATEEEE 
+    
+     public boolean modi(Equipos obje)
+    {
+        boolean resp = false;
+        Connection cn = new Conexion().getConn();
+        try {
+            String consu = "UPDATE equipos SET"
+                    + " nomb_equi = '"+ obje.getNombEqui()+"',"
+                    + " desc_equi = '"+ obje.getDescEqui()+"'"
+                    + " WHERE codi_equi = '"+ obje.getCodiEqui()+"'";
+            PreparedStatement cmd = cn.prepareStatement(consu);
+           cmd.execute();
+        resp = true;          
+        } 
+        catch (Exception e) 
+        {
+            System.err.println("Error al actualizar equipos: " + e.getMessage());
+        }
+        finally
+        {
+            try {
+                if(cn!=null)
+                {
+                    if(!cn.isClosed())
+                    {
+                        cn.close();
+                    }
+                }
+                
+            } catch (SQLException err) 
+            {
+                err.printStackTrace();
+            }
+        }
+        return resp;
+    }
+     
+     
+     //DELETE
+     
+     
+     public boolean elim (Equipos obje)
+    {
+        boolean resp = false;
+        Connection cn = new Conexion().getConn();
+        try {
+            String consu = "DELETE * FROM equipos WHERE codi_equi = "+obje.getCodiEqui()+"";
+            PreparedStatement cmd = cn.prepareStatement(consu);
+           cmd.execute();
+        resp = true;          
+        } 
+        catch (Exception e) 
+        {
+            System.err.println("Error al Eliminar equipos: " + e.getMessage());
+        }
+        finally
+        {
+            try {
+                if(cn!=null)
+                {
+                    if(!cn.isClosed())
+                    {
+                        cn.close();
+                    }
+                }
+                
+            } catch (SQLException err) 
+            {
+                err.printStackTrace();
+            }
+        }
+        return resp;
+    }
+    
+    
+    
     //Consulta para sacar todos los tados de la tabla :v
     public List<Equipos> consTodo()
     {

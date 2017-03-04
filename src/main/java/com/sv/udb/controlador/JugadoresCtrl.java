@@ -140,16 +140,18 @@ public class JugadoresCtrl {
     
     
     //Consulta para sacar todos los tados de la tabla :v
-  /*  public List<Jugadores> consTodo()
+    public List<Jugadores> consTodo()
     {
-        List<Equipos> resp = new ArrayList();
+        List<Jugadores> resp = new ArrayList();
         Connection cn = new Conexion().getConn();
         try {
-            PreparedStatement cmd = cn.prepareStatement("Select * from equipos");
+            PreparedStatement cmd = cn.prepareStatement("select codi_juga, nomb_equi, nomb_juga, edad_juga, altu_juga, peso_juga\n" +
+"from jugadores, equipos where jugadores.codi_equi = equipos.codi_equi");
             ResultSet rs = cmd.executeQuery();
+            
             while(rs.next())
             {
-                resp.add(new Jugadores(rs.getInt(1),rs.getString(2),rs.getString(3)));
+                resp.add(new Jugadores(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6)));
             }
         } catch (Exception e) 
         {
@@ -171,7 +173,8 @@ public class JugadoresCtrl {
             }
         }
         return resp;
-    }*/
+    }
+   
     
    /* //Codigo para llenar el combo intento de llenar combo
      public  ArrayList<String> LlenarCombo()

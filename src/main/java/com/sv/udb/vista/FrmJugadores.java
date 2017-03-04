@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -125,6 +126,11 @@ public class FrmJugadores extends javax.swing.JFrame {
 
         btnconsu.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btnconsu.setText("Consultar");
+        btnconsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnconsuActionPerformed(evt);
+            }
+        });
 
         btnelim.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btnelim.setText("Eliminar");
@@ -134,16 +140,30 @@ public class FrmJugadores extends javax.swing.JFrame {
 
         tbljugadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "null", "null"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tbljugadores);
+        if (tbljugadores.getColumnModel().getColumnCount() > 0) {
+            tbljugadores.getColumnModel().getColumn(0).setResizable(false);
+            tbljugadores.getColumnModel().getColumn(1).setResizable(false);
+            tbljugadores.getColumnModel().getColumn(2).setResizable(false);
+            tbljugadores.getColumnModel().getColumn(3).setResizable(false);
+            tbljugadores.getColumnModel().getColumn(4).setResizable(false);
+            tbljugadores.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -289,6 +309,22 @@ public class FrmJugadores extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void btnconsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsuActionPerformed
+        try {
+          DefaultTableModel model = (DefaultTableModel)this.tbljugadores.getModel();
+          while(model.getRowCount()>0)
+          {
+              model.removeRow(0);
+          }
+          for(Jugadores temp : new JugadoresCtrl().consTodo())
+          {
+            model.addRow(new Object[] {temp.getCodiJuga(), temp.getCodiEqui(), temp.getNombJuga(), temp.getEdadJuga(), temp.getAltuJuga(), temp.getPesoJuga()});
+          }
+        } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnconsuActionPerformed
 
     /**
      * @param args the command line arguments

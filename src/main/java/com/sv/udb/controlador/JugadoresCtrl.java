@@ -173,7 +173,7 @@ public class JugadoresCtrl {
         return resp;
     }*/
     
-    //Codigo para llenar el combo
+   /* //Codigo para llenar el combo intento de llenar combo
      public  ArrayList<String> LlenarCombo()
             {
                 Connection cn = new Conexion().getConn();
@@ -200,33 +200,5 @@ public class JugadoresCtrl {
                return Equi;
                
                              
-            }
-     
-      public  ArrayList<String> LlenarCombo2()
-            {
-                Connection cn = new Conexion().getConn();
-               ArrayList<String> Equi = new ArrayList<String>();
-              
-               
-                try 
-                { 
-                    String Eq = "select * from equipos";
-               PreparedStatement cmd = cn.prepareStatement(Eq);
-                    //rs variable resultset y st variable statement
-                    rs = cmd.executeQuery();
-                    
-                    
-                } catch (Exception e) {
-                }
-                try {
-                    while(rs.next())
-                    {
-                        Equi.add(rs.getString("codi_equi"));
-                    }
-                } catch (Exception e) {
-                }
-               return Equi;
-               
-                             
-            }
-}
+            }*/
+     }

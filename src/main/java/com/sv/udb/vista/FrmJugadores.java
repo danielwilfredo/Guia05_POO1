@@ -5,11 +5,15 @@
  */
 package com.sv.udb.vista;
 
+import com.sv.udb.controlador.EquiposCtrl;
 import com.sv.udb.controlador.JugadoresCtrl;
+import com.sv.udb.modelo.Equipos;
 import com.sv.udb.modelo.Jugadores;
 import com.sv.udb.recursos.Conexion;
 import java.sql.Connection;
 import java.util.ArrayList;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,17 +30,19 @@ public class FrmJugadores extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         cmbEqui.removeAllItems();
         this.txtCodJuga.enable(false);
-        JugadoresCtrl ob = new JugadoresCtrl();
-        ArrayList<String> Equi = new ArrayList<String>();
-        ArrayList<String> Equi2 = new ArrayList<String>();
-        Equi = ob.LlenarCombo();
-        Equi2 = ob.LlenarCombo2();
-        //con este for, los datos se despliegan hacia abajo, sin el salen todos de corrido
-        for (int i = 0; i < Equi.size(); i++) 
-        {
-         cmbEqui.addItem(Equi.get(i));
+        llenarComboBox();
+        
         }
    
+    private void llenarComboBox()
+    {
+        DefaultComboBoxModel<Equipos> modeEqui = new DefaultComboBoxModel<>();
+        for(Equipos temp : new EquiposCtrl().consTodo())
+        {
+            modeEqui.addElement(temp);
+        }
+        this.cmbEqui.setModel((ComboBoxModel)modeEqui);
+        
     }
 
     /**
@@ -258,10 +264,10 @@ public class FrmJugadores extends javax.swing.JFrame {
          {
               throw new Exception("Ingrese una descripcion");
          }   
-               
+             Equipos objeEqui = (Equipos)this.cmbEqui.getSelectedItem();  
             Jugadores obje = new Jugadores();
             obje.setCodiJuga(Integer.parseInt(this.txtCodJuga.getText()));
-            obje.setCodiEqui(this.cmbEqui.getSelectedIndex()+1);
+            obje.setCodiEqui(objeEqui.getCodiEqui());
             obje.setNombJuga(this.txtNombJuga.getText());
             obje.setEdadJuga(this.txtEdadJuga.getText());
             obje.setAltuJuga(Integer.parseInt(this.txtAltuJuga.getText()));

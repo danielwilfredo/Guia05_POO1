@@ -261,7 +261,7 @@ public class FrmJugadores extends javax.swing.JFrame {
                
             Jugadores obje = new Jugadores();
             obje.setCodiJuga(Integer.parseInt(this.txtCodJuga.getText()));
-            obje.setCodiEqui(this.cmbEqui.getSelectedIndex()+1);
+            obje.setCodiEqui(Integer.parseInt(String.valueOf(this.cmbEqui.getSelectedItem())));
             obje.setNombJuga(this.txtNombJuga.getText());
             obje.setEdadJuga(this.txtEdadJuga.getText());
             obje.setAltuJuga(Integer.parseInt(this.txtAltuJuga.getText()));

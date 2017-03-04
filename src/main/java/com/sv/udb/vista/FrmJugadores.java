@@ -6,9 +6,11 @@
 package com.sv.udb.vista;
 
 import com.sv.udb.controlador.JugadoresCtrl;
+import com.sv.udb.modelo.Jugadores;
 import com.sv.udb.recursos.Conexion;
 import java.sql.Connection;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +28,9 @@ public class FrmJugadores extends javax.swing.JFrame {
         this.txtCodJuga.enable(false);
         JugadoresCtrl ob = new JugadoresCtrl();
         ArrayList<String> Equi = new ArrayList<String>();
+        ArrayList<String> Equi2 = new ArrayList<String>();
         Equi = ob.LlenarCombo();
+        Equi2 = ob.LlenarCombo2();
         //con este for, los datos se despliegan hacia abajo, sin el salen todos de corrido
         for (int i = 0; i < Equi.size(); i++) 
         {
@@ -237,7 +241,47 @@ public class FrmJugadores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        // TODO add your handling code here:
+ try {
+             if(txtCodJuga.getText().isEmpty())
+         {
+             throw new Exception("Seleccione un registro");
+         }
+         if (txtNombJuga.getText().isEmpty())
+         {
+              throw new Exception("Ingrese un Nombre");
+         }
+         if(txtAltuJuga.getText().isEmpty())
+         {
+              throw new Exception("Ingrese una descripcion");
+         }   
+           if(txtPesoJuga.getText().isEmpty())
+         {
+              throw new Exception("Ingrese una descripcion");
+         }   
+               
+            Jugadores obje = new Jugadores();
+            obje.setCodiJuga(Integer.parseInt(this.txtCodJuga.getText()));
+            obje.setCodiEqui(this.cmbEqui.getSelectedIndex()+1);
+            obje.setNombJuga(this.txtNombJuga.getText());
+            obje.setEdadJuga(this.txtEdadJuga.getText());
+            obje.setAltuJuga(Integer.parseInt(this.txtAltuJuga.getText()));
+            obje.setPesoJuga(this.txtPesoJuga.getText());
+            if(new JugadoresCtrl().guar(obje))
+            {
+                JOptionPane.showMessageDialog(this, "Datos guardados");
+                this.txtAltuJuga.setText("");
+                this.txtCodJuga.setText("1");
+                this.txtEdadJuga.setText("");
+                this.txtPesoJuga.setText("");
+                this.txtNombJuga.setText("");
+                
+            }
+            else JOptionPane.showMessageDialog(this, "Error al guardar los datos");
+            
+        } catch (Exception e) 
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_btnguardarActionPerformed
 
     /**

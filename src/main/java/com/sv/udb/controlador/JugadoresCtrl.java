@@ -30,11 +30,11 @@ public class JugadoresCtrl {
         boolean resp = false;
         Connection cn = new Conexion().getConn();
         try {
-            PreparedStatement cmd = cn.prepareStatement("insert into jugadores values (null, ?, ?, ?, ?, ?')");
-        cmd.setString(1, String.valueOf(obje.getCodiEqui()));
+        PreparedStatement cmd = cn.prepareStatement("insert into jugadores values (null, ?, ?, ?, ?, ?)");
+        cmd.setInt(1, obje.getCodiEqui());
         cmd.setString(2, obje.getNombJuga());
         cmd.setString(3, obje.getEdadJuga());
-        cmd.setString(4, String.valueOf(obje.getAltuJuga()));
+        cmd.setInt(4, obje.getAltuJuga());
         cmd.setString(5, obje.getPesoJuga());
         cmd.execute();
         resp = true;          
@@ -194,6 +194,34 @@ public class JugadoresCtrl {
                     while(rs.next())
                     {
                         Equi.add(rs.getString("nomb_equi"));
+                    }
+                } catch (Exception e) {
+                }
+               return Equi;
+               
+                             
+            }
+     
+      public  ArrayList<String> LlenarCombo2()
+            {
+                Connection cn = new Conexion().getConn();
+               ArrayList<String> Equi = new ArrayList<String>();
+              
+               
+                try 
+                { 
+                    String Eq = "select * from equipos";
+               PreparedStatement cmd = cn.prepareStatement(Eq);
+                    //rs variable resultset y st variable statement
+                    rs = cmd.executeQuery();
+                    
+                    
+                } catch (Exception e) {
+                }
+                try {
+                    while(rs.next())
+                    {
+                        Equi.add(rs.getString("codi_equi"));
                     }
                 } catch (Exception e) {
                 }

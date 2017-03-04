@@ -6,9 +6,11 @@
 package com.sv.udb.vista;
 
 import com.sv.udb.controlador.EquiposCtrl;
+import com.sv.udb.controlador.JugadoresCtrl;
 import com.sv.udb.modelo.Equipos;
 import com.sv.udb.recursos.Conexion;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,7 +26,10 @@ public class FrmEquipo extends javax.swing.JFrame {
      */
     public FrmEquipo() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

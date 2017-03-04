@@ -5,7 +5,9 @@
  */
 package com.sv.udb.controlador;
 
+
 import com.sv.udb.modelo.Equipos;
+import com.sv.udb.modelo.Jugadores;
 import com.sv.udb.recursos.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,23 +21,27 @@ import java.util.List;
  *
  * @author DanielWilfredo
  */
-public class EquiposCtrl {
+public class JugadoresCtrl {
+     static Statement st;
+    static ResultSet rs;
    
-    
-    public boolean guar(Equipos obje)
+    public boolean guar(Jugadores obje)
     {
         boolean resp = false;
         Connection cn = new Conexion().getConn();
         try {
-            PreparedStatement cmd = cn.prepareStatement("Insert into equipos values(NULL,?,?)");
-        cmd.setString(1, obje.getNombEqui());
-        cmd.setString(2, obje.getDescEqui());
+            PreparedStatement cmd = cn.prepareStatement("insert into jugadores values (null, ?, ?, ?, ?, ?')");
+        cmd.setString(1, String.valueOf(obje.getCodiEqui()));
+        cmd.setString(2, obje.getNombJuga());
+        cmd.setString(3, obje.getEdadJuga());
+        cmd.setString(4, String.valueOf(obje.getAltuJuga()));
+        cmd.setString(5, obje.getPesoJuga());
         cmd.execute();
         resp = true;          
         } 
         catch (Exception e) 
         {
-            System.err.println("Error al guardar equipos: " + e.getMessage());
+            System.err.println("Error al guardar Jugadores: " + e.getMessage());
         }
         finally
         {
@@ -58,7 +64,7 @@ public class EquiposCtrl {
     
     //UPDATEEEE 
     
-     public boolean modi(Equipos obje)
+     /*public boolean modi(Jugadores obje)
     {
         boolean resp = false;
         Connection cn = new Conexion().getConn();
@@ -93,12 +99,12 @@ public class EquiposCtrl {
         }
         return resp;
     }
-     
+     */
      
      //DELETE
      
      
-     public boolean elim (Equipos obje)
+     public boolean elim (Jugadores obje)
     {
         boolean resp = false;
         Connection cn = new Conexion().getConn();
@@ -134,7 +140,7 @@ public class EquiposCtrl {
     
     
     //Consulta para sacar todos los tados de la tabla :v
-    public List<Equipos> consTodo()
+  /*  public List<Jugadores> consTodo()
     {
         List<Equipos> resp = new ArrayList();
         Connection cn = new Conexion().getConn();
@@ -143,7 +149,7 @@ public class EquiposCtrl {
             ResultSet rs = cmd.executeQuery();
             while(rs.next())
             {
-                resp.add(new Equipos(rs.getInt(1),rs.getString(2),rs.getString(3)));
+                resp.add(new Jugadores(rs.getInt(1),rs.getString(2),rs.getString(3)));
             }
         } catch (Exception e) 
         {
@@ -165,7 +171,34 @@ public class EquiposCtrl {
             }
         }
         return resp;
-    }
-   
+    }*/
     
+    //Codigo para llenar el combo
+     public  ArrayList<String> LlenarCombo()
+            {
+                Connection cn = new Conexion().getConn();
+               ArrayList<String> Equi = new ArrayList<String>();
+              
+               
+                try 
+                { 
+                    String Eq = "select * from equipos";
+               PreparedStatement cmd = cn.prepareStatement(Eq);
+                    //rs variable resultset y st variable statement
+                    rs = cmd.executeQuery();
+                    
+                    
+                } catch (Exception e) {
+                }
+                try {
+                    while(rs.next())
+                    {
+                        Equi.add(rs.getString("nomb_equi"));
+                    }
+                } catch (Exception e) {
+                }
+               return Equi;
+               
+                             
+            }
 }

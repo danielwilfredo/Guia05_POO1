@@ -139,14 +139,14 @@ public class JugadoresCtrl {
     
     
     
-    //Consulta para sacar todos los tados de la tabla :v
+    //Consulta para sacar todos los tados de la tabla jugadores
     public List<Jugadores> consTodo()
     {
         List<Jugadores> resp = new ArrayList();
         Connection cn = new Conexion().getConn();
         try {
             PreparedStatement cmd = cn.prepareStatement("select codi_juga, nomb_equi, nomb_juga, edad_juga, altu_juga, peso_juga\n" +
-"from jugadores, equipos where jugadores.codi_equi = equipos.codi_equi");
+            "from jugadores, equipos where jugadores.codi_equi = equipos.codi_equi;");
             ResultSet rs = cmd.executeQuery();
             
             while(rs.next())

@@ -319,7 +319,7 @@ public class FrmJugadores extends javax.swing.JFrame {
           }
           for(Jugadores temp : new JugadoresCtrl().consTodo())
           {
-            model.addRow(new Object[] {temp.getCodiJuga(), temp.getCodiEqui(), temp.getNombJuga(), temp.getEdadJuga(), temp.getAltuJuga(), temp.getPesoJuga()});
+            model.addRow(new Object[] {temp.getCodiJuga(), temp.getNombEqui(), temp.getNombJuga(), temp.getEdadJuga(), temp.getAltuJuga(), temp.getPesoJuga()});
           }
         } catch (Exception ex) {
         JOptionPane.showMessageDialog(this, ex.getMessage());

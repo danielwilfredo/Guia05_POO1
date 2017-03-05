@@ -16,7 +16,7 @@ public class Jugadores {
     private String EdadJuga;
     private int AltuJuga;
     private String PesoJuga;
-    private String NombEqui;
+ 
     
     public Jugadores()
     {
@@ -30,15 +30,7 @@ public class Jugadores {
         this.AltuJuga = AltuJuga;
         this.PesoJuga = PesoJuga;
     }
-     public Jugadores(int CodiJuga, String NombEqui, String NombJuga, String EdadJuga, int AltuJuga, String PesoJuga) {
-        this.CodiJuga = CodiJuga;
-        this.NombEqui = NombEqui;
-        this.NombJuga = NombJuga;
-        this.EdadJuga = EdadJuga;
-        this.AltuJuga = AltuJuga;
-        this.PesoJuga = PesoJuga;
-    }
-    
+        
 
     public int getCodiJuga() {
         return CodiJuga;
@@ -87,14 +79,6 @@ public class Jugadores {
     public void setPesoJuga(String PesoJuga) {
         this.PesoJuga = PesoJuga;
     }
-
-    public String getNombEqui() {
-        return NombEqui;
-    }
-
-    public void setNombEqui(String NombEqui) {
-        this.NombEqui = NombEqui;
-    }
-    
+  
     
 }

@@ -145,13 +145,15 @@ public class JugadoresCtrl {
         List<Jugadores> resp = new ArrayList();
         Connection cn = new Conexion().getConn();
         try {
-            PreparedStatement cmd = cn.prepareStatement("select codi_juga, nomb_equi, nomb_juga, edad_juga, altu_juga, peso_juga\n" +
-            "from jugadores, equipos where jugadores.codi_equi = equipos.codi_equi;");
+            /*PreparedStatement cmd = cn.prepareStatement("select codi_juga, nomb_equi, "
+             + "nomb_juga, edad_juga, altu_juga, peso_juga\n" +
+             "from jugadores, equipos where jugadores.codi_equi = equipos.codi_equi;");*/
+            PreparedStatement cmd = cn.prepareStatement("select * from jugadores"); 
             ResultSet rs = cmd.executeQuery();
             
             while(rs.next())
             {
-                resp.add(new Jugadores(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6)));
+                resp.add(new Jugadores(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6)));
             }
         } catch (Exception e) 
         {

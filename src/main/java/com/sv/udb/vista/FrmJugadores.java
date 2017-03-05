@@ -123,6 +123,11 @@ public class FrmJugadores extends javax.swing.JFrame {
 
         btnmodi.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btnmodi.setText("Modificar");
+        btnmodi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmodiActionPerformed(evt);
+            }
+        });
 
         btnconsu.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btnconsu.setText("Consultar");
@@ -146,24 +151,13 @@ public class FrmJugadores extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4", "null", "null"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        ));
+        tbljugadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbljugadoresMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbljugadores);
-        if (tbljugadores.getColumnModel().getColumnCount() > 0) {
-            tbljugadores.getColumnModel().getColumn(0).setResizable(false);
-            tbljugadores.getColumnModel().getColumn(1).setResizable(false);
-            tbljugadores.getColumnModel().getColumn(2).setResizable(false);
-            tbljugadores.getColumnModel().getColumn(3).setResizable(false);
-            tbljugadores.getColumnModel().getColumn(4).setResizable(false);
-            tbljugadores.getColumnModel().getColumn(5).setResizable(false);
-        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -319,12 +313,42 @@ public class FrmJugadores extends javax.swing.JFrame {
           }
           for(Jugadores temp : new JugadoresCtrl().consTodo())
           {
-            model.addRow(new Object[] {temp.getCodiJuga(), temp.getNombEqui(), temp.getNombJuga(), temp.getEdadJuga(), temp.getAltuJuga(), temp.getPesoJuga()});
+            model.addRow(new Object[] 
+            {
+                temp.getCodiJuga(), 
+                temp, 
+                temp.getNombJuga(),
+                temp.getEdadJuga(), 
+                temp.getAltuJuga(),
+                temp.getPesoJuga()
+            });
           }
         } catch (Exception ex) {
         JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnconsuActionPerformed
+
+    private void tbljugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbljugadoresMouseClicked
+       int fila = this.tbljugadores.getSelectedRow();
+      if (fila>=0)
+      {
+          System.err.println("LLEGO AQUI");
+          Jugadores obje = (Jugadores)this.tbljugadores.getValueAt(fila,1);
+          this.txtCodJuga.setText(String.valueOf(obje.getCodiJuga()));
+          this.cmbEqui.setEditable(true); 
+          this.cmbEqui.setSelectedItem((Equipos)new EquiposCtrl().concmb(obje.getCodiEqui()));
+          System.err.println((Equipos)new EquiposCtrl().concmb(obje.getCodiEqui()));
+          this.cmbEqui.setEditable(false);
+          this.txtNombJuga.setText(obje.getNombJuga());
+          this.txtEdadJuga.setText(obje.getEdadJuga());
+          this.txtAltuJuga.setText(String.valueOf(obje.getAltuJuga()));
+          this.txtPesoJuga.setText(obje.getPesoJuga());
+      }
+    }//GEN-LAST:event_tbljugadoresMouseClicked
+
+    private void btnmodiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnmodiActionPerformed
 
     /**
      * @param args the command line arguments

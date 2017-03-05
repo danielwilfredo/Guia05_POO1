@@ -139,6 +139,11 @@ public class FrmJugadores extends javax.swing.JFrame {
 
         btnelim.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btnelim.setText("Eliminar");
+        btnelim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnelimActionPerformed(evt);
+            }
+        });
 
         btnlimp.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btnlimp.setText("Limpiar");
@@ -321,7 +326,10 @@ public class FrmJugadores extends javax.swing.JFrame {
                 temp.getEdadJuga(), 
                 temp.getAltuJuga(),
                 temp.getPesoJuga()
-            });
+            } 
+                    
+            );
+            
           }
         } catch (Exception ex) {
         JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -347,8 +355,64 @@ public class FrmJugadores extends javax.swing.JFrame {
     }//GEN-LAST:event_tbljugadoresMouseClicked
 
     private void btnmodiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodiActionPerformed
-        // TODO add your handling code here:
+       try {
+         if(txtCodJuga.getText().isEmpty())
+         {
+             throw new Exception("Seleccione un registro");
+         }
+         if (txtNombJuga.getText().isEmpty())
+         {
+              throw new Exception("Ingrese un Nombre");
+         }
+         if(txtEdadJuga.getText().isEmpty())
+         {
+              throw new Exception("Ingrese una edad");
+         }         
+            Jugadores obje = new Jugadores();
+             Equipos objeEqui = (Equipos)this.cmbEqui.getSelectedItem();
+            obje.setCodiJuga(Integer.parseInt(this.txtCodJuga.getText()));
+            obje.setCodiEqui(objeEqui.getCodiEqui());
+            obje.setNombJuga(this.txtNombJuga.getText());
+            obje.setEdadJuga(this.txtEdadJuga.getText());
+            obje.setAltuJuga(Integer.parseInt(this.txtAltuJuga.getText()));
+            obje.setPesoJuga(this.txtPesoJuga.getText());
+            if(new JugadoresCtrl().modi(obje))
+            {
+                JOptionPane.showMessageDialog(this, "Datos Modificados");
+             //   this.txtDesc.setText("");
+               // this.txtNomb.setText("");
+               // this.txtCodi.setText("1");
+            }
+            else JOptionPane.showMessageDialog(this, "Error al Actualizar los datos");
+            
+        } catch (Exception e) 
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_btnmodiActionPerformed
+
+    private void btnelimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnelimActionPerformed
+        try {
+             if(txtCodJuga.getText().isEmpty())
+         {
+             throw new Exception("Seleccione un registro");
+         }
+            Jugadores obje = new Jugadores();
+            obje.setCodiJuga(Integer.parseInt(this.txtCodJuga.getText()));
+            if(new JugadoresCtrl().elim(obje))
+            {
+                JOptionPane.showMessageDialog(this, "Datos Eliminados");
+              //  this.txtDesc.setText("");
+                //this.txtNomb.setText("");
+                //this.txtCodi.setText("1");
+            }
+            else JOptionPane.showMessageDialog(this, "Error al Eliminar los datos");
+            
+        } catch (Exception e) 
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_btnelimActionPerformed
 
     /**
      * @param args the command line arguments

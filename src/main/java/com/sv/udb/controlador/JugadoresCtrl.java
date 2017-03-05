@@ -64,15 +64,12 @@ public class JugadoresCtrl {
     
     //UPDATEEEE 
     
-     /*public boolean modi(Jugadores obje)
+     public boolean modi(Jugadores obje)
     {
         boolean resp = false;
         Connection cn = new Conexion().getConn();
         try {
-            String consu = "UPDATE equipos SET"
-                    + " nomb_equi = '"+ obje.getNombEqui()+"',"
-                    + " desc_equi = '"+ obje.getDescEqui()+"'"
-                    + " WHERE codi_equi = '"+ obje.getCodiEqui()+"'";
+            String consu = "update jugadores set codi_equi="+obje.getCodiEqui()+", nomb_juga='"+ obje.getNombJuga() +"', edad_juga='"+ obje.getEdadJuga() +"' ,  altu_juga="+ obje.getAltuJuga() +", peso_juga='" + obje.getPesoJuga()  +"' where codi_juga = "+ obje.getCodiJuga()+"";
             PreparedStatement cmd = cn.prepareStatement(consu);
            cmd.execute();
         resp = true;          
@@ -99,7 +96,7 @@ public class JugadoresCtrl {
         }
         return resp;
     }
-     */
+    
      
      //DELETE
      
@@ -109,14 +106,14 @@ public class JugadoresCtrl {
         boolean resp = false;
         Connection cn = new Conexion().getConn();
         try {
-            String consu = "DELETE FROM equipos WHERE codi_equi = " + obje.getCodiEqui() +"";
+            String consu = "DELETE FROM jugadores WHERE codi_juga = " + obje.getCodiJuga()+"";
             PreparedStatement cmd = cn.prepareStatement(consu);
             cmd.execute();
         resp = true;          
         } 
         catch (Exception e) 
         {
-            System.err.println("Error al Eliminar equipos: " + e.getMessage());
+            System.err.println("Error al Eliminar Jugador: " + e.getMessage());
         }
         finally
         {

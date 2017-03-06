@@ -183,6 +183,11 @@ public class FrmPartidos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblpartidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblpartidosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblpartidos);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -454,6 +459,24 @@ try
             JOptionPane.showMessageDialog(this, "Error " + e.getMessage());
         }
     }//GEN-LAST:event_btnconsultarActionPerformed
+
+    private void tblpartidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblpartidosMouseClicked
+       int fila = this.tblpartidos.getSelectedRow();
+      if (fila>=0)
+      {
+          System.err.println("LLEGO AQUI");
+          Partidos obje = (Partidos)this.tblpartidos.getValueAt(fila,1);
+          this.txtCodJuga.setText(String.valueOf(obje.getCodiJuga()));
+          this.cmbEqui.setEditable(true); 
+          this.cmbEquipoA.setSelectedItem((Equipos)new EquiposCtrl().concmb(obje.getCodiEqui()));
+          System.err.println((Equipos)new EquiposCtrl().concmb(obje.getCodiEqui()));
+          this.cmbEqui.setEditable(false);
+          this.txtNombJuga.setText(obje.getNombJuga());
+          this.txtEdadJuga.setText(obje.getEdadJuga());
+          this.txtAltuJuga.setText(String.valueOf(obje.getAltuJuga()));
+          this.txtPesoJuga.setText(obje.getPesoJuga());
+      }
+    }//GEN-LAST:event_tblpartidosMouseClicked
 
     /**
      * @param args the command line arguments

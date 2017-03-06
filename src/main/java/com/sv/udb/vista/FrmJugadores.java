@@ -147,6 +147,11 @@ public class FrmJugadores extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbljugadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbljugadoresMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbljugadores);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -301,6 +306,10 @@ public class FrmJugadores extends javax.swing.JFrame {
     private void btnconsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnconsuActionPerformed
+
+    private void tbljugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbljugadoresMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbljugadoresMouseClicked
 
     /**
      * @param args the command line arguments

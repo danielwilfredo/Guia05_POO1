@@ -434,7 +434,7 @@ try
                 model.removeRow(0);
                 for(Partidos temp: new PartidosCtrl().consTodo())
                 {
-                    model.addRow(new Object[]{
+                    model.addRow(new Object[]{temp.getCodi_par(),
                     temp.getNa(), temp.getNb(), temp.getGol_equi_a(), temp.getGol_equi_b(), 
                     temp.getFecha(), temp.getHora(), temp.getLugar()});
                 }

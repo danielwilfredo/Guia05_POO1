@@ -143,7 +143,10 @@ public class EquiposCtrl {
             ResultSet rs = cmd.executeQuery();
             while(rs.next())
             {
-                resp.add(new Equipos(rs.getInt(1),rs.getString(2),rs.getString(3)));
+                resp.add(new Equipos(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3)));
             }
         } catch (Exception e) 
         {

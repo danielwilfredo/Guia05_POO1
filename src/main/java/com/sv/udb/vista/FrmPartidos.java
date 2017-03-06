@@ -5,8 +5,12 @@
  */
 package com.sv.udb.vista;
 
+import com.sv.udb.controlador.EquiposCtrl;
 import com.sv.udb.controlador.PartidosCtrl;
+import com.sv.udb.modelo.Equipos;
 import com.sv.udb.modelo.Partidos;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +24,29 @@ public class FrmPartidos extends javax.swing.JFrame {
      */
     public FrmPartidos() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        llenarComboBox();
+        llenarComboBox2();
+    }
+    private void llenarComboBox()
+    {
+        DefaultComboBoxModel<Equipos> modeEqui = new DefaultComboBoxModel<>();
+        for(Equipos temp : new EquiposCtrl().consTodo())
+        {
+            modeEqui.addElement(temp);
+        }
+        this.cmbEquipoA.setModel((ComboBoxModel)modeEqui);
+        
+    }
+    private void llenarComboBox2()
+    {
+        DefaultComboBoxModel<Equipos> modeEqui = new DefaultComboBoxModel<>();
+        for(Equipos temp : new EquiposCtrl().consTodo())
+        {
+            modeEqui.addElement(temp);
+        }
+        this.cmbEquipoB.setModel((ComboBoxModel)modeEqui);
+        
     }
 
     /**
@@ -277,12 +304,18 @@ public class FrmPartidos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcodipartiActionPerformed
 
+    
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
 
-
+ if (this.cmbEquipoA.getSelectedItem() == this.cmbEquipoB.getSelectedItem())
+    {
+        JOptionPane.showMessageDialog(this,"No se pueden enfrentar los mismos equipos");
+    }
 try
 {
-    Partidos obje = new Partidos();
+   
+    
+        Partidos obje = new Partidos();
             obje.setCodi_par(Integer.parseInt(this.txtcodiparti.getText()));
             obje.setCodi_equi_a(Integer.parseInt(String.valueOf(this.cmbEquipoA.getSelectedItem())));
             obje.setCodi_equi_b(Integer.parseInt(String.valueOf(this.cmbEquipoB.getSelectedItem())));
@@ -300,10 +333,13 @@ try
             else JOptionPane.showMessageDialog(this, "Error al guardar los datos");
             
         
-}
+
+    
+    }
+    
   catch (Exception e) 
         {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this,"Pura mierda" + e.getMessage());
         }
 
 

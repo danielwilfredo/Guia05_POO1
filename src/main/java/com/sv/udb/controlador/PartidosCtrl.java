@@ -5,6 +5,7 @@
  */
 package com.sv.udb.controlador;
 
+import com.sv.udb.modelo.Equipos;
 import com.sv.udb.modelo.Partidos;
 import com.sv.udb.recursos.Conexion;
 import java.sql.Connection;
@@ -61,5 +62,38 @@ public class PartidosCtrl {
         }
         return resp;
     }
-    
+    public Equipos concmb(int codiEqui)
+    {
+        Equipos resp = new Equipos();
+        Connection cn = new Conexion().getConn();
+        try {
+           PreparedStatement cmd = cn.prepareStatement("Select * from equipos where codi_equi=?");
+           cmd.setInt(1, codiEqui);
+            ResultSet rs = cmd.executeQuery();  
+            while(rs.next())
+            {
+            resp.setCodiEqui(rs.getInt(1));
+            resp.setNombEqui(rs.getString(2));
+            resp.setDescEqui(rs.getString(3));
+            }
+        } catch (Exception e) {
+        }
+          finally 
+        {
+            try {
+                if(cn!=null)
+                {
+                    if(!cn.isClosed())
+                    {
+                        cn.close();
+                    }
+                }
+            } catch (SQLException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        return resp;
+    }
+
 }

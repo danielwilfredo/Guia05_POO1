@@ -12,6 +12,7 @@ import com.sv.udb.modelo.Partidos;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -79,7 +80,7 @@ public class FrmPartidos extends javax.swing.JFrame {
         cmbEquipoA = new javax.swing.JComboBox<>();
         cmbEquipoB = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblpartidos = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         txtcodiparti = new javax.swing.JTextField();
 
@@ -163,7 +164,7 @@ public class FrmPartidos extends javax.swing.JFrame {
 
         cmbEquipoB.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblpartidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -174,7 +175,7 @@ public class FrmPartidos extends javax.swing.JFrame {
                 "id_partidos", "equipo a", "equipo b", "gol equipo a", "gol equipo b", "fecha", "hora", "lugar"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblpartidos);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Codigo Partido");
@@ -426,7 +427,22 @@ try
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultarActionPerformed
-       
+        try {
+            DefaultTableModel model = (DefaultTableModel)this.tblpartidos.getModel();
+            while(model.getRowCount()>0)
+            {
+                model.removeRow(0);
+                for(Partidos temp: new PartidosCtrl().consTodo())
+                {
+                    model.addRow(new Object[]{
+                    temp.getNa(), temp.getNb(), temp.getGol_equi_a(), temp.getGol_equi_b(), 
+                    temp.getFecha(), temp.getHora(), temp.getLugar()});
+                }
+                    
+                
+            }
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btnconsultarActionPerformed
 
     /**
@@ -482,7 +498,7 @@ try
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblpartidos;
     private javax.swing.JTextField txtcodiparti;
     private javax.swing.JTextField txtfecha;
     private javax.swing.JTextField txtgola;

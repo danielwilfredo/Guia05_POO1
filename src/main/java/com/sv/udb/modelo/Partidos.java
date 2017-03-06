@@ -19,6 +19,8 @@ public class Partidos {
     private String fecha;
     private String hora;
     private String lugar;
+    private String na;
+    private String nb;
     
     public Partidos()
     {}
@@ -27,6 +29,16 @@ public class Partidos {
         this.codi_par = codi_par;
         this.codi_equi_a = codi_equi_a;
         this.codi_equi_b = codi_equi_b;
+        this.gol_equi_a = gol_equi_a;
+        this.gol_equi_b = gol_equi_b;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.lugar = lugar;
+    }
+     public Partidos(int codi_par, String na, String nb, int gol_equi_a, int gol_equi_b, String fecha, String hora, String lugar) {
+        this.codi_par = codi_par;
+        this.na = na;
+        this.nb = nb;
         this.gol_equi_a = gol_equi_a;
         this.gol_equi_b = gol_equi_b;
         this.fecha = fecha;
@@ -100,6 +112,24 @@ public class Partidos {
     public void setLugar(String lugar) {
         this.lugar = lugar;
     }
+
+    public String getNa() {
+        return na;
+    }
+
+    public void setNa(String na) {
+        this.na = na;
+    }
+
+    public String getNb() {
+        return nb;
+    }
+
+    public void setNb(String nb) {
+        this.nb = nb;
+    }
+    
+    
     
     
     

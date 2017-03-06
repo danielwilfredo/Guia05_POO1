@@ -98,15 +98,30 @@ public class FrmPartidos extends javax.swing.JFrame {
 
         btneliminar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btneliminar.setText("Eliminar");
+        btneliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneliminarActionPerformed(evt);
+            }
+        });
 
         btnlimpiar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnlimpiar.setText("Limpiar");
 
         btnmodificar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnmodificar.setText("Modificar");
+        btnmodificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmodificarActionPerformed(evt);
+            }
+        });
 
         btnconsultar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnconsultar.setText("Consultar");
+        btnconsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnconsultarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Equipo A");
@@ -150,13 +165,13 @@ public class FrmPartidos extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id_partidos", "equipo a", "equipo b", "gol equipo a", "gol equipo b", "fecha", "hora", "lugar"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -307,18 +322,23 @@ public class FrmPartidos extends javax.swing.JFrame {
     
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
 
- if (this.cmbEquipoA.getSelectedItem() == this.cmbEquipoB.getSelectedItem())
-    {
-        JOptionPane.showMessageDialog(this,"No se pueden enfrentar los mismos equipos");
-    }
+
 try
 {
    
     
-        Partidos obje = new Partidos();
+        Equipos objeEqui = (Equipos)this.cmbEquipoA.getSelectedItem(); 
+        Equipos objeEqui2 = (Equipos)this.cmbEquipoB.getSelectedItem(); 
+         if (objeEqui.getCodiEqui() == objeEqui2.getCodiEqui())
+    {
+        JOptionPane.showMessageDialog(this,"No se pueden enfrentar los mismos equipos");
+    }
+         else
+         {
+             Partidos obje = new Partidos();
             obje.setCodi_par(Integer.parseInt(this.txtcodiparti.getText()));
-            obje.setCodi_equi_a(Integer.parseInt(String.valueOf(this.cmbEquipoA.getSelectedItem())));
-            obje.setCodi_equi_b(Integer.parseInt(String.valueOf(this.cmbEquipoB.getSelectedItem())));
+            obje.setCodi_equi_a(objeEqui.getCodiEqui());
+            obje.setCodi_equi_b(objeEqui2.getCodiEqui());
             obje.setGol_equi_a(Integer.parseInt(this.txtgola.getText()));
             obje.setGol_equi_b(Integer.parseInt(this.txtgolb.getText()));
             obje.setFecha(this.txtfecha.getText());
@@ -331,8 +351,8 @@ try
                 
             }
             else JOptionPane.showMessageDialog(this, "Error al guardar los datos");
-            
-        
+         }
+       
 
     
     }
@@ -348,6 +368,66 @@ try
 
 // TODO add your handling code here:
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
+       try {
+             Equipos objeEqui = (Equipos)this.cmbEquipoA.getSelectedItem(); 
+        Equipos objeEqui2 = (Equipos)this.cmbEquipoB.getSelectedItem(); 
+         if (objeEqui.getCodiEqui() == objeEqui2.getCodiEqui())
+    {
+        JOptionPane.showMessageDialog(this,"No se pueden enfrentar los mismos equipos");
+    }
+         else
+         {
+         
+            Partidos obje = new Partidos();
+            obje.setCodi_par(Integer.parseInt(this.txtcodiparti.getText()));
+            obje.setCodi_equi_a(objeEqui.getCodiEqui());
+            obje.setCodi_equi_b(objeEqui2.getCodiEqui());
+            obje.setGol_equi_a(Integer.parseInt(this.txtgola.getText()));
+            obje.setGol_equi_b(Integer.parseInt(this.txtgolb.getText()));
+            obje.setFecha(this.txtfecha.getText());
+            obje.setHora(this.txthora.getText());
+            obje.setLugar(this.txtlugar.getText());
+             if(new PartidosCtrl().modi(obje))
+            {
+                JOptionPane.showMessageDialog(this, "Datos Modificados");
+               
+                this.txtcodiparti.setText("1");
+            }
+            else JOptionPane.showMessageDialog(this, "Error al Actualizar los datos");
+         }
+        } catch (Exception e) 
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_btnmodificarActionPerformed
+
+    private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
+       try {
+             if(txtcodiparti.getText().isEmpty())
+         {
+             throw new Exception("Seleccione un registro");
+         }
+            Partidos obje = new Partidos();
+            obje.setCodi_par(Integer.parseInt(this.txtcodiparti.getText()));
+            if(new PartidosCtrl().elim(obje))
+            {
+                JOptionPane.showMessageDialog(this, "Datos Eliminados");
+                
+                this.txtcodiparti.setText("1");
+            }
+            else JOptionPane.showMessageDialog(this, "Error al Eliminar los datos");
+            
+        } catch (Exception e) 
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_btneliminarActionPerformed
+
+    private void btnconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultarActionPerformed
+       
+    }//GEN-LAST:event_btnconsultarActionPerformed
 
     /**
      * @param args the command line arguments

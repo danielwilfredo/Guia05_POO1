@@ -116,6 +116,11 @@ public class FrmJugadores extends javax.swing.JFrame {
 
         btnmodi.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btnmodi.setText("Modificar");
+        btnmodi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmodiActionPerformed(evt);
+            }
+        });
 
         btnconsu.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btnconsu.setText("Consultar");
@@ -283,6 +288,10 @@ public class FrmJugadores extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void btnmodiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnmodiActionPerformed
 
     /**
      * @param args the command line arguments

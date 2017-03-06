@@ -178,20 +178,23 @@ public class PartidosCtrl {
         List<Partidos> resp = new ArrayList();
         Connection cn = new Conexion().getConn();
         try {
-            PreparedStatement cmd = cn.prepareStatement("select  a.id_partido, a.nomb_equi, b.nomb_equi, b.gol_equi_a ,b.gol_equi_b, b.Fecha, b.Hora, b.lugar\n" +
-"  from nombre_equipo_a a, nombre_equipo_b b where b.id_partido = a.id_partido");
+            PreparedStatement cmd = cn.prepareStatement("select id_partido, partidos.codi_equi_a, partidos.codi_equi_b, equipos.nomb_equi, gol_equi_a, gol_equi_b,fecha,hora,lugar from equipos,partidos where partidos.codi_equi_b = equipos.codi_equi");
             ResultSet rs = cmd.executeQuery();
-            while(rs.next())
+            PreparedStatement cmd2 = cn.prepareStatement("select nomb_equi from partidos,equipos where partidos.codi_equi_a = equipos.codi_equi;");
+            ResultSet rs2 = cmd2.executeQuery();
+
+            while(rs.next() && rs2.next())
             {
-                resp.add(new Partidos(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getInt(4),
+                resp.add(new Partidos(rs.getInt(1),
+                        rs.getInt(2),
+                        rs2.getString(1),
+                        rs.getInt(3),
+                        rs.getString(4),
                         rs.getInt(5),
-                rs.getString(6),
-                rs.getString(7),
-                rs.getString(8)) );
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9)));
             }
         } catch (Exception e) 
         {

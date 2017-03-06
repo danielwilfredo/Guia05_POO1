@@ -24,6 +24,19 @@ public class Partidos {
     
     public Partidos()
     {}
+    
+    public Partidos(int codi_par, int codi_equi_a, String na, int codi_equi_b, String nb, int gol_equi_a, int gol_equi_b, String fecha, String hora, String lugar) {
+        this.codi_par = codi_par;
+        this.codi_equi_a = codi_equi_a;
+        this.na = na;
+        this.codi_equi_b = codi_equi_b;
+        this.nb = nb;
+        this.gol_equi_a = gol_equi_a;
+        this.gol_equi_b = gol_equi_b;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.lugar = lugar;
+    }
 
     public Partidos(int codi_par, int codi_equi_a, int codi_equi_b, int gol_equi_a, int gol_equi_b, String fecha, String hora, String lugar) {
         this.codi_par = codi_par;

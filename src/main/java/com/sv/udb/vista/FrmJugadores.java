@@ -124,6 +124,11 @@ public class FrmJugadores extends javax.swing.JFrame {
 
         btnconsu.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btnconsu.setText("Consultar");
+        btnconsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnconsuActionPerformed(evt);
+            }
+        });
 
         btnelim.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         btnelim.setText("Eliminar");
@@ -292,6 +297,10 @@ public class FrmJugadores extends javax.swing.JFrame {
     private void btnmodiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnmodiActionPerformed
+
+    private void btnconsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnconsuActionPerformed
 
     /**
      * @param args the command line arguments

@@ -172,7 +172,7 @@ public class FrmPartidos extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id_partidos", "equipo a", "equipo b", "gol equipo a", "gol equipo b", "fecha", "hora", "lugar"
+                "id_partidos", "equipo a", "gol equipo a", "equipo b", "gol equipo b", "fecha", "hora", "lugar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -443,9 +443,8 @@ try
             }
                 for(Partidos temp: new PartidosCtrl().consTodo())
                 {
-                    model.addRow(new Object[]{temp, temp.getGol_equi_a(),
-                    temp.getNb(), temp.getGol_equi_b(), temp.getNb(), 
-                    temp.getFecha(), temp.getHora(), temp.getLugar()});
+                    model.addRow(new Object[]{temp.getCodi_par(), temp.getNa(), temp.getGol_equi_a(), 
+                    temp.getNb(), temp.getGol_equi_b(), temp.getFecha(), temp.getHora(), temp.getLugar()});
                 }
                     
                 

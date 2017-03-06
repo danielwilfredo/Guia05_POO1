@@ -376,8 +376,8 @@
                   <Table columnCount="8" rowCount="4">
                     <Column editable="false" title="id_partidos" type="java.lang.Object"/>
                     <Column editable="false" title="equipo a" type="java.lang.Object"/>
-                    <Column editable="false" title="equipo b" type="java.lang.Object"/>
                     <Column editable="false" title="gol equipo a" type="java.lang.Object"/>
+                    <Column editable="false" title="equipo b" type="java.lang.Object"/>
                     <Column editable="false" title="gol equipo b" type="java.lang.Object"/>
                     <Column editable="false" title="fecha" type="java.lang.Object"/>
                     <Column editable="false" title="hora" type="java.lang.Object"/>

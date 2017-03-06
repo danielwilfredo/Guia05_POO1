@@ -166,7 +166,7 @@ public class EquiposCtrl {
         }
         return resp;
     }
-    
+    //llenar el combo
     public Equipos concmb(int codiEqui)
     {
         Equipos resp = new Equipos();
